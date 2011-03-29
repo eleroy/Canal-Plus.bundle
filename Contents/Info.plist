@@ -23,13 +23,15 @@
 	<key>PlexClientPlatforms</key>
 	<string>MacOSX,LGTV</string>
 	<key>PlexFrameworkVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>PlexMediaContainer</key>
 	<array>
 		<string>MP4</string>
 		<string>FLV</string>
 	</array>
 	<key>PlexPluginDebug</key>
+	<string>1</string>
+	<key>PlexPluginDevMode</key>
 	<string>1</string>
 	<key>PlexPluginMode</key>
 	<string>AlwaysOn</string>
