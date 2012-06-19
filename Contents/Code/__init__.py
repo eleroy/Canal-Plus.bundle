@@ -130,6 +130,14 @@ def ElementVideo(video, titre, description, thumb):
 		if lien.startswith("rtmp://geo2-vod-fms.canalplus.fr/ondemand"):
 			lien = lien.replace("rtmp://geo2-vod-fms.canalplus.fr/ondemand","")
 			url = "rtmp://geo2-vod-fms.canalplus.fr/ondemand"
+			
+		if lien.startswith("rtmp://geo4-vod-fms.canalplus.fr/ondemand"):
+			lien = lien.replace("rtmp://geo4-vod-fms.canalplus.fr/ondemand","")
+			url = "rtmp://geo4-vod-fms.canalplus.fr/ondemand"
+			
+		if lien.startswith("rtmp://geo5-vod-fms.canalplus.fr/ondemand"):
+			lien = lien.replace("rtmp://geo5-vod-fms.canalplus.fr/ondemand","")
+			url = "rtmp://geo5-vod-fms.canalplus.fr/ondemand"
 
 		if lien.endswith(".mp4"):
 			lien = "mp4:/" + lien	
