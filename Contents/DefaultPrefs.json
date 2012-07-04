@@ -1,9 +1,0 @@
-[
-  {
-    "id": "qualite",
-    "type": "enum",
-    "default": "HD",
-    "label": "Qualité préférée (si disponible)",
-    "values": ["HD","HQ","LQ"]
-  }
-]
