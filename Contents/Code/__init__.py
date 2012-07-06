@@ -17,7 +17,7 @@ def ListeCategories():
 		if icon == None:
 			icon = R('icon-folder.png')
 
-        oc.add(DirectoryObject(key=Callback(ListeSousCategories, idCategorie=idCategorie, nomCategorie=nom), title=nom, thumb=icon))
+		oc.add(DirectoryObject(key=Callback(ListeSousCategories, idCategorie=idCategorie, nomCategorie=nom), title=nom, thumb=icon))
 
 	return oc
 
@@ -35,7 +35,7 @@ def ListeSousCategories(idCategorie, nomCategorie):
 		if icon == None:
 			icon = R('icon-folder.png')
 
-        oc.add(DirectoryObject(key=Callback(ListeVidoes, idSousCategorie=idSousCategorie, nomSousCategorie=nom, art=art), title=nom, thumb=icon))
+		oc.add(DirectoryObject(key=Callback(ListeVideos, idSousCategorie=idSousCategorie, nomSousCategorie=nom, art=art), title=nom, thumb=icon))
 
 	return oc
 
@@ -52,15 +52,15 @@ def ListeVideos(idSousCategorie, nomSousCategorie, art):
 
 		description = video.xpath('./INFOS/DESCRIPTION')[0].text
 		thumb = video.xpath('./MEDIA/IMAGES/GRAND')[0].text
-        oc.add(DirectoryObject(key=Callback(ListeVideosLiees, idVideo=idVideo, nomSousCategorie=nomSousCategorie, art=art), title=titre, summary=description,
-            thumb=Resource.ContentsOfURLWithFallback(url=thumb, fallback="icon-default.png"))
+		oc.add(DirectoryObject(key=Callback(ListeVideosLiees, idVideo=idVideo, nomSousCategorie=nomSousCategorie, art=art), title=titre, summary=description,
+			thumb=Resource.ContentsOfURLWithFallback(url=thumb, fallback="icon-default.png")))
 
 	return oc
 
 #Video chosen + related videos
 def ListeVideosLiees(idVideo, nomSousCategorie, art):
 	oc = ObjectContainer(title2 = nomSousCategorie, art = art)
-
+	Log(HTTP.Request(BASE_URL + "getVideosLiees/" + idVideo).content)
 	videosXml = XML.ElementFromURL(BASE_URL + "getVideosLiees/" + idVideo)
 	videos = videosXml.xpath("//VIDEO[ID='"+idVideo+"']")
 
@@ -73,8 +73,8 @@ def ListeVideosLiees(idVideo, nomSousCategorie, art):
 
 		description = video.xpath('./INFOS/DESCRIPTION')[0].text
 		thumb = video.xpath('.//MEDIA/IMAGES/GRAND')[0].text
-        video_url = '' ##find the video url and pass it to the URL Service
-        oc.add(VideoClipObject(url=video_url, title=titre, summary=description,
-            thumb=Resource.ContentsOfURLWithFallback(url=thumb, fallback="icon-default.png")))
+		video_url = '' ##find the video url and pass it to the URL Service
+		oc.add(VideoClipObject(url=video_url, title=titre, summary=description,
+			thumb=Resource.ContentsOfURLWithFallback(url=thumb, fallback="icon-default.png")))
 
 	return oc
