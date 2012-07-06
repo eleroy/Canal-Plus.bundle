@@ -73,7 +73,7 @@ def ListeVideosLiees(idVideo, nomSousCategorie, art):
 
 		description = video.xpath('./INFOS/DESCRIPTION')[0].text
 		thumb = video.xpath('.//MEDIA/IMAGES/GRAND')[0].text
-		video_url = '' ##find the video url and pass it to the URL Service
+		video_url = video.xpath('.//URL')[0].text
 		oc.add(VideoClipObject(url=video_url, title=titre, summary=description,
 			thumb=Resource.ContentsOfURLWithFallback(url=thumb, fallback="icon-default.png")))
 
