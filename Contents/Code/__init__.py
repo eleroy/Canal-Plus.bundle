@@ -60,7 +60,6 @@ def ListeVideos(idSousCategorie, nomSousCategorie, art):
 #Video chosen + related videos
 def ListeVideosLiees(idVideo, nomSousCategorie, art):
 	oc = ObjectContainer(title2 = nomSousCategorie, art = art)
-	Log(HTTP.Request(BASE_URL + "getVideosLiees/" + idVideo).content)
 	videosXml = XML.ElementFromURL(BASE_URL + "getVideosLiees/" + idVideo)
 	videos = videosXml.xpath("//VIDEO[ID='"+idVideo+"']")
 
@@ -73,7 +72,8 @@ def ListeVideosLiees(idVideo, nomSousCategorie, art):
 
 		description = video.xpath('./INFOS/DESCRIPTION')[0].text
 		thumb = video.xpath('.//MEDIA/IMAGES/GRAND')[0].text
-		video_url = video.xpath('.//URL')[0].text
+		video_url = video.xpath('.//URL/text()')[0]
+		Log(video_url)
 		oc.add(VideoClipObject(url=video_url, title=titre, summary=description,
 			thumb=Resource.ContentsOfURLWithFallback(url=thumb, fallback="icon-default.png")))
 
